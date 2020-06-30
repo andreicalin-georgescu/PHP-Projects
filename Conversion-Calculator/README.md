@@ -9,7 +9,7 @@ included in this repo.
 To test locally, an APACHE Server is required.
 
 To add more currencies, refer to https://exchangeratesapi.io to check for
-available currencies and modify the config.php file.
+available currencies and modify the config/currencies.php file.
 
 This project is a slight improvement over the one presented during the 
 PHP Essentials course on https://codecourse.com.
