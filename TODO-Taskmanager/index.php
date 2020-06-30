@@ -12,4 +12,3 @@ try {
  }
 
 $storage = new MySqlDatabaseTaskStorage($db);
-
