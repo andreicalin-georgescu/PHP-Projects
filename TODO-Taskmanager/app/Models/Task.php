@@ -23,7 +23,7 @@ class Task
 
 	public function setComplete($complete = true)
 	{
-		$this->compete = $complete;
+		$this->complete = $complete;
 	}
 
 	public function getComplete()

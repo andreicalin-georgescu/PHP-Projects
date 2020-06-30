@@ -3,6 +3,7 @@
 require 'vendor/autoload.php';
 
 use Todo\Models\Task;
+use Todo\TaskManager;
 use Todo\Storage\MySqlDatabaseTaskStorage;
 
 try {
@@ -12,3 +13,5 @@ try {
  }
 
 $storage = new MySqlDatabaseTaskStorage($db);
+$manager = new TaskManager($storage);
+
