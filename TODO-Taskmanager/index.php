@@ -5,13 +5,12 @@ require 'vendor/autoload.php';
 use Todo\Models\Task;
 use Todo\TaskManager;
 use Todo\Storage\MySqlDatabaseTaskStorage;
+use Todo\Config\dbConfig;
 
-try {
- 	 $db = new PDO('mysql:host=127.0.0.1;dbname=todo;port=8889', 'root', 'root');
- } catch (PDOException $e) {
- 	die('Something went wrong when connecting to the database.');
- }
+$dbConnection = dbConfig::getInstance()->getConnection();
 
-$storage = new MySqlDatabaseTaskStorage($db);
+$storage = new MySqlDatabaseTaskStorage($dbConnection);
 $manager = new TaskManager($storage);
+
+var_dump($dbConnection);
 

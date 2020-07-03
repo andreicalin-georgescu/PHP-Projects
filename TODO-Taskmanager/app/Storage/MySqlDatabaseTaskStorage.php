@@ -9,7 +9,7 @@ use Todo\Storage\Contracts\TaskStorageInterface;
 class MySqlDatabaseTaskStorage implements TaskStorageInterface
 {
 	protected $db;
-
+	
 	public function __construct(PDO $db)
 	{
 		$this->db = $db;
