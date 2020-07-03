@@ -45,6 +45,18 @@ class MySqlDatabaseTaskStorage implements TaskStorageInterface
 		return $this->get($task->getId());
 	}
 
+	public function delete(int $taskId){
+		$statement = $this->db->prepare("
+			DELETE FROM tasks
+			WHERE id = :id
+		");
+
+		if (!$statement->execute(['id' => $taskId])) {
+			return false;
+		}
+		return true;
+	}
+
 	public function get($id)
 	{
 		$statement = $this->db->prepare("

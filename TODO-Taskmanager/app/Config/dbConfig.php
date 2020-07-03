@@ -9,7 +9,7 @@ namespace Todo\Config;
 
 use PDO;
 
-class dbConfig {
+class DbConfig {
 	private static $instance = NULL;
 
 	private $driver;
@@ -43,7 +43,7 @@ class dbConfig {
 
 	public static function getInstance() {
 		if (self::$instance === NULL) {
-			self::$instance = new dbConfig();
+			self::$instance = new DbConfig();
 		}
 
 		return self::$instance;

@@ -24,6 +24,11 @@ class TaskManager
 		return $this->storage->update($task);
 	}
 
+	public function deleteTask(int $taskId)
+	{
+		return $this->storage->delete($taskId);
+	}
+
 	public function getTask($id)
 	{
 		return $this->storage->get($id);
