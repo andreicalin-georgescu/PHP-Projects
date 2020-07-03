@@ -12,5 +12,5 @@ $dbConnection = dbConfig::getInstance()->getConnection();
 $storage = new MySqlDatabaseTaskStorage($dbConnection);
 $manager = new TaskManager($storage);
 
-var_dump($dbConnection);
+var_dump($manager->getTask(1));
 
