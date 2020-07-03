@@ -1,16 +1,9 @@
 <?php
 
 require 'vendor/autoload.php';
-
-use Todo\Models\Task;
 use Todo\TaskManager;
-use Todo\Storage\MySqlDatabaseTaskStorage;
-use Todo\Config\dbConfig;
 
-$dbConnection = DbConfig::getInstance()->getConnection();
-
-$storage = new MySqlDatabaseTaskStorage($dbConnection);
-$manager = new TaskManager($storage);
+$manager = TaskManager::getInstance();
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +13,7 @@ $manager = new TaskManager($storage);
 		<title>Task Planner</title>
 	</head>
 	<body>
-		<form action="" method="post">
+		<form action="app/Interact/SubmitTask.php" method="post" autocomplete="off">
 			<div class="taskDescr">
 				<label for="taskDescription">Task Description:</label><br>
 				<input type="text" id="taskDescription" name="taskDescription"><br>
@@ -31,18 +24,18 @@ $manager = new TaskManager($storage);
 			</div>
 			<div class="button">
 				<input type="submit" name="submitNewTask" value="Submit new task">
-				<input formaction="" method="post" type="submit" name="updateTask" value="Update existing task"><br>
 			</div>
 			
 		</form>
 		<br>
-		<form action="" method="post">
+		<form action="" method="post" autocomplete="off">
 			<div>
 				<label for="taskId">Task ID:</label><br>
 				<input type="number" id="taskId" name="taskId"><br>
 			</div>
 			<div class="button">
 				<input type="submit" name="submitButton" value="Find task with this ID">
+				<input formaction="" method="post" type="submit" name="updateTask" value="Update task with this ID">
 				<input type="submit" name="submitButton" value="Delete task with this ID">
 			</div>
 		</form>

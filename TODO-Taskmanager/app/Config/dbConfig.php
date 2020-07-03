@@ -24,7 +24,8 @@ class DbConfig {
 	 * for further ease of updating
 	 */
 
-	private function __construct() {
+	private function __construct() 
+	{
 		$config = require_once('conf.php');
 
 		$this->driver = $config['driver'];
@@ -41,7 +42,8 @@ class DbConfig {
 	 	}
 	} 
 
-	public static function getInstance() {
+	public static function getInstance() 
+	{
 		if (self::$instance === NULL) {
 			self::$instance = new DbConfig();
 		}
@@ -49,7 +51,10 @@ class DbConfig {
 		return self::$instance;
 	}
 
-	public function getConnection() {
+	// Return the connection to the database
+	
+	public function getConnection() 
+	{
 		return $this->conn;
 	}
 }
