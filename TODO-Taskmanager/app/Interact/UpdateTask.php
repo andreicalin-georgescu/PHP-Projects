@@ -35,11 +35,12 @@ if (!isset($_POST['taskDescription']))
 }
 
 if (!empty($_POST['taskDescription'])) {
+
 	// Escape the description field
 
 	$description = htmlspecialchars($_POST['taskDescription']);
 } else {
-	$description = 'no description';
+	$description = $manager->getTask($task->getId())->getDescription();
 }
 
 if (isset($_POST['taskComplete'])) {
