@@ -8,13 +8,17 @@ use Todo\TaskManager;
 
 $manager = TaskManager::getInstance();
 
-if (!isset($_POST['taskId'])) 
-{
+if (!isset($_POST['taskId'])) {
 	return false;
 }
 
+if (empty($_POST['taskId'])) {
+	header('Refresh:5; url=http://localhost:8888/index.php', true, 303);
+	echo 'No id specified. Redirecting to Home...';
+	die();
+}
+
 $task = $manager->getTask($_POST['taskId']);
-//var_dump($task->getComplete());
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +66,7 @@ $task = $manager->getTask($_POST['taskId']);
 				</div>
 				<div class="button">
 					<input type="submit" name="updateTask" value="Update the task">
+					<input type="submit" name="deleteTask" formaction="/app/Interact/DeleteTask.php" value="Delete the task"><br>
 					<input type="submit" name="goIndex" formaction="/index.php" value="Go to Home">
 					<input type="hidden" name="taskId" value="<?php echo $task->getId(); ?>">
 				</div>

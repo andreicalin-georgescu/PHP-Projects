@@ -18,8 +18,7 @@ class TaskManager
 	private static $instance = NULL;
 	protected $storage;
 
-	private function __construct()
-	{
+	private function __construct() {
 		$dbConnection = DbConfig::getInstance()->getConnection();
 		$this->storage = new MySqlDatabaseTaskStorage($dbConnection);
 	}
@@ -28,8 +27,7 @@ class TaskManager
 	 * of calling class
 	 */
 	
-	public static function getInstance() 
-	{
+	public static function getInstance()  {
 		if (self::$instance === NULL) {
 			self::$instance = new TaskManager();
 		}
@@ -37,28 +35,23 @@ class TaskManager
 		return self::$instance;
 	}
 
-	public function addTask(Task $task)
-	{
+	public function addTask(Task $task) {
 		return $this->storage->store($task);
 	}
 
-	public function updateTask(Task $task)
-	{
+	public function updateTask(Task $task) {
 		return $this->storage->update($task);
 	}
 
-	public function deleteTask(int $taskId)
-	{
+	public function deleteTask(int $taskId) {
 		return $this->storage->delete($taskId);
 	}
 
-	public function getTask($id)
-	{
+	public function getTask($id) {
 		return $this->storage->get($id);
 	}
 
-	public function getAllTasks()
-	{
+	public function getAllTasks() {
 		return $this->storage->getAll();
 	}
 }

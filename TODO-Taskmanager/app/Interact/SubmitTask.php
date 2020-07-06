@@ -10,8 +10,7 @@ use Todo\TaskManager;
 
 $manager = TaskManager::getInstance();
 
-if (!isset($_POST['taskDue'])) 
-{
+if (!isset($_POST['taskDue'])) {
 	return false;
 }
 
@@ -19,8 +18,7 @@ $dueDate = new DateTime();
 $timestamp = strtotime($_POST['taskDue']);
 $dueDate->setTimestamp($timestamp);
 
-if (!isset($_POST['taskDescription']))
-{
+if (!isset($_POST['taskDescription'])) {
 	return false;
 }
 

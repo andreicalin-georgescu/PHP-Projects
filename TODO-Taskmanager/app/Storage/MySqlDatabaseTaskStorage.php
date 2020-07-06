@@ -10,13 +10,11 @@ class MySqlDatabaseTaskStorage implements TaskStorageInterface
 {
 	protected $db;
 	
-	public function __construct(PDO $db)
-	{
+	public function __construct(PDO $db) {
 		$this->db = $db;
 	}
 
-	public function store(Task $task)
-	{
+	public function store(Task $task) {
 		$statement = $this->db->prepare("
 			INSERT INTO tasks (description, due, complete)
 			VALUES (:description, :due, :complete)
@@ -27,8 +25,7 @@ class MySqlDatabaseTaskStorage implements TaskStorageInterface
 		return $this->get($this->db->lastInsertId());
 	}
 
-	public function update(Task $task)
-	{
+	public function update(Task $task) {
 		$statement = $this->db->prepare("
 			UPDATE tasks
 			SET 
@@ -45,7 +42,7 @@ class MySqlDatabaseTaskStorage implements TaskStorageInterface
 		return $this->get($task->getId());
 	}
 
-	public function delete(int $taskId){
+	public function delete(int $taskId) {
 		$statement = $this->db->prepare("
 			DELETE FROM tasks
 			WHERE id = :id
@@ -57,8 +54,7 @@ class MySqlDatabaseTaskStorage implements TaskStorageInterface
 		return true;
 	}
 
-	public function get($id)
-	{
+	public function get($id) {
 		$statement = $this->db->prepare("
 			SELECT id, description, due, complete
 			FROM tasks
@@ -74,8 +70,7 @@ class MySqlDatabaseTaskStorage implements TaskStorageInterface
 		return $statement->fetch();
 	}
 
-	public function getAll()
-	{
+	public function getAll() {
 		$statement = $this->db->prepare("
 			SELECT id, description, due, complete 
 			FROM tasks
@@ -88,8 +83,7 @@ class MySqlDatabaseTaskStorage implements TaskStorageInterface
 		return $statement->fetchAll();
 	}
 
-	protected function buildCollumns(Task $task, array $additional=[])
-	{
+	protected function buildCollumns(Task $task, array $additional=[]) {
 		return array_merge([
 			'description' => $task->getDescription(),
 			'due' => $task->getDue()->format('Y-m-d H:i:s'),

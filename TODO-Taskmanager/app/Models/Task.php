@@ -11,46 +11,38 @@ class Task
 	protected $description;
 	protected $due;
 
-	public function setDescription($description)
-	{
+	public function setDescription($description) {
 		$this->description = $description;
 	}
 
-	public function getDescription()
-	{
+	public function getDescription() {
 		return $this->description;
 	}
 
-	public function setComplete($complete = true)
-	{
+	public function setComplete($complete = true) {
 		$this->complete = $complete;
 	}
 
-	public function getComplete()
-	{
+	public function getComplete() {
 		return (bool)$this->complete;
 	}
 
-	public function setDue(DateTime $due)
-	{
+	public function setDue(DateTime $due) {
 		$this->due = $due;
 	}
 
-	public function getDue()
-	{
+	public function getDue() {
 		if (!$this->due instanceof DateTime) {
 			return new DateTime($this->due);
 		}
 		return $this->due;
 	}
 
-	public function getId()
-	{
+	public function getId() {
 		return $this->id;
 	}
 
-	public function setId(int $id)
-	{
+	public function setId(int $id) {
 		$this->id = $id;
 	}
 }

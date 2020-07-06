@@ -29,8 +29,7 @@ if (!empty($_POST['taskDue'])) {
 	$dueDate = new DateTime($manager->getTask($task->getId())->getDue()->format('Y-m-d H:i:s'));
 }
 
-if (!isset($_POST['taskDescription']))
-{
+if (!isset($_POST['taskDescription'])) {
 	return false;
 }
 
@@ -45,7 +44,6 @@ if (!empty($_POST['taskDescription'])) {
 
 if (isset($_POST['taskComplete'])) {
 	($_POST['taskComplete'] === 'Complete') ? $task->setComplete(1) : $task->setComplete(0);
-	
 }
 
 $task->setDescription($description);

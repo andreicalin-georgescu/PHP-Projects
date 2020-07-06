@@ -11,6 +11,7 @@ $manager = TaskManager::getInstance();
 
 $tasks = $manager->getAllTasks();
 
+echo "<h2>Current Tasks</h2>";
 foreach ($tasks as $task) {
 	echo "<table>
 		<tr>
