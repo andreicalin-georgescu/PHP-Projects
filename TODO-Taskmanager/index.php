@@ -28,18 +28,16 @@ $manager = TaskManager::getInstance();
 			
 		</form>
 		<br>
-		<form action="" method="post" autocomplete="off">
+		<form action="/app/Interact/GetTask.php" method="post" autocomplete="off">
 			<div>
 				<label for="taskId">Task ID:</label><br>
 				<input type="number" id="taskId" name="taskId"><br>
 			</div>
 			<div class="button">
-				<input type="submit" name="submitButton" value="Find task with this ID">
-				<input formaction="" method="post" type="submit" name="updateTask" value="Update task with this ID">
-				<input type="submit" name="submitButton" value="Delete task with this ID">
+				<input type="submit" name="submitButton" value="Find task with this ID"><br>
+				<br>
+				<input formaction="/app/Interact/GetAll.php" method="post" type="submit" name="getAll" value="Get All Tasks">
 			</div>
 		</form>
-		<br>
-		<button class="button" name="getAll" value="getAll">Get all tasks</button><br>
 	</body>
 </html>

@@ -4,7 +4,7 @@ namespace Todo\Interact;
 
 require '../../vendor/autoload.php';
 
-use Carbon\Carbon;
+use DateTime;
 use Todo\Models\Task;
 use Todo\TaskManager;
 
@@ -15,8 +15,9 @@ if (!isset($_POST['taskDue']))
 	return false;
 }
 
+$dueDate = new DateTime();
 $timestamp = strtotime($_POST['taskDue']);
-$c = Carbon::createFromTimestamp($timestamp);
+$dueDate->setTimestamp($timestamp);
 
 if (!isset($_POST['taskDescription']))
 {
@@ -29,7 +30,7 @@ $description = htmlspecialchars($_POST['taskDescription']);
 	
 $task = new Task();
 $task->setDescription($description);
-$task->setDue($c);
+$task->setDue($dueDate);
 
 $manager->addTask($task);
 
