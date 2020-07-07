@@ -19,6 +19,13 @@ if (empty($_POST['taskId'])) {
 }
 
 $task = $manager->getTask($_POST['taskId']);
+
+if ($task === false) {
+	header('Refresh:5; url=http://localhost:8888/index.php', true, 303);
+	echo 'Specified id not found. Redirecting to Home...';
+	die();
+}
+
 ?>
 
 <!DOCTYPE html>
