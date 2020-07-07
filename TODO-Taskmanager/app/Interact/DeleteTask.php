@@ -14,4 +14,4 @@ $manager = TaskManager::getInstance();
 
 $manager->deleteTask($_POST['taskId']);
 
-header('Location: /app/Interact/GetAll.php');
+header('Location: /index.php');
