@@ -50,5 +50,27 @@ $task->setDescription($description);
 $task->setDue($dueDate);
 
 $manager->updateTask($task);
+?>
 
-header ('Location: /index.php');
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>UpdateTask</title>
+	</head>
+	<body>
+		<form id="getAllHiddenForm" action="/index.php" method="post">
+			<input type="hidden" name="getAll" value="Get All Tasks">
+			<input type="submit" name="submission_button" value="Click here if the site is taking too long to redirect!">
+		</form>
+		<script type="text/javascript">
+			function submitForm() {
+				document.getElementById('getAllHiddenForm').submit();
+			}
+
+			// Call function as soon as UpdateTask loads
+
+			window.onload = submitForm();
+		</script>
+	</body>
+</html>
