@@ -2,7 +2,7 @@
 
 namespace Todo\Models;
 
-use DateTime;
+use Carbon\Carbon;
 
 class Task
 {
@@ -27,13 +27,13 @@ class Task
 		return (bool)$this->complete;
 	}
 
-	public function setDue(DateTime $due) {
+	public function setDue(Carbon $due) {
 		$this->due = $due;
 	}
 
 	public function getDue() {
-		if (!$this->due instanceof DateTime) {
-			return new DateTime($this->due);
+		if (!$this->due instanceof Carbon) {
+			return new Carbon($this->due);
 		}
 		return $this->due;
 	}

@@ -86,7 +86,7 @@ class MySqlDatabaseTaskStorage implements TaskStorageInterface
 	protected function buildCollumns(Task $task, array $additional=[]) {
 		return array_merge([
 			'description' => $task->getDescription(),
-			'due' => $task->getDue()->format('Y-m-d H:i:s'),
+			'due' => $task->getDue()->toDateTimeString(),
 			'complete' => $task->getComplete() ? 1 : 0
 		], $additional);
 	}

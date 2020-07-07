@@ -75,6 +75,8 @@ if ($task === false) {
 					<input type="submit" name="updateTask" value="Update Task">
 					<input type="submit" name="deleteTask" formaction="/app/Interact/DeleteTask.php" value="Delete Task"><br>
 					<input type="submit" name="goIndex" formaction="/index.php" value="Go Home">
+					<input type="hidden" name="getAll" value="Get All Tasks">
+
 					<input type="hidden" name="taskId" value="<?php echo $task->getId(); ?>">
 				</div>
 		</form>
