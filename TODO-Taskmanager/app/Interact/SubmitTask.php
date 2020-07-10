@@ -14,8 +14,13 @@ if (!isset($_POST['taskDue'])) {
 	return false;
 }
 
-$timestamp = strtotime($_POST['taskDue']);
-$dueDate = Carbon::createFromTimeStamp($timestamp);
+if (!empty($_POST['taskDue'])) {
+	$timestamp = strtotime($_POST['taskDue']);
+	$dueDate = Carbon::createFromTimeStamp($timestamp);
+} else {
+	$dueDate = Carbon::today();
+	$dueDate = $dueDate->endOfDay();
+}
 
 if (!isset($_POST['taskDescription'])) {
 	return false;
