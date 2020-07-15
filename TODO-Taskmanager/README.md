@@ -4,5 +4,10 @@ course on *codecourse.com.*
 It offers basic functionalities such as adding, editing, deleting and listing tasks.
 
 **TODO:**
-- To further improve on the project I will try and add a basic frontend to 
+- A frontend to the details page of a task should be added;
 the application.
+- After deleting a task, the users should still see all their remaining ones on homepage.
+
+**Caveats**
+- The application is vulnerable to Cross Site Scripting, as adding such 
+a protection for this simple app seemed like overkill.
