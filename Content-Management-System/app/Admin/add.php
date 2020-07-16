@@ -1,6 +1,12 @@
 <?php
+	use \CMS\Includes\Connection;
+
+	require '../../vendor/autoload.php';
+
 	session_start();
-	require_once '../includes/connection.php';
+
+	$dbConnection = new Connection;
+	$pdo = $dbConnection->getConnection();
 
 	if (!isset($_SESSION['logged_in'])) {
 		header('Location: index.php');
@@ -36,12 +42,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>CMS Mockup</title>
-		<link rel="stylesheet" type="text/css" href="../assets/style.css">
+		<link rel="stylesheet" type="text/css" href="../Assets/style.css">
 
 	</head>
 	<body>
 		<div class="container">
-			<a href="index.php" id="logo"> CMS </a>
+			<a href="../../index.php" id="logo"> CMS </a>
 			<br>
 			<h4>Add Article</h4>
 

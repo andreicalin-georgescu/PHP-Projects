@@ -1,8 +1,13 @@
 <?php
-	require_once 'includes/connection.php';
-	require_once 'includes/article.php';
+	use \CMS\Includes\Article;
+	use \CMS\Includes\Connection;
 
-	$article = new Article;
+	require 'vendor/autoload.php';
+
+	$dbConnection = new Connection;
+	$pdo = $dbConnection->getConnection();
+
+	$article = new Article($pdo);
 	$articles = $article->fetchAll();
 
 ?>
@@ -12,7 +17,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>CMS Mockup</title>
-		<link rel="stylesheet" type="text/css" href="assets/style.css">
+		<link rel="stylesheet" type="text/css" href="app/assets/style.css">
 	</head>
 	<body>
 		<div class="container">
@@ -22,7 +27,7 @@
 				<?php
 				foreach ($articles as $article) {?>
 					<li>
-						<a href="article.php?id=<?php echo $article['article_id'];?>">
+						<a href="app/article.php?id=<?php echo $article['article_id'];?>">
 							<?php echo $article['article_title'];?>
 						</a>
 						- <small> posted <?php echo $article['article_timestamp']; ?></small>
@@ -30,7 +35,7 @@
 				<?php } ?>
 			</ol>
 			<br>
-			<small><a href="admin">admin</a></small>
+			<small><a href="app/Admin/index.php">admin</a></small>
 		</div>
 
 	</body>

@@ -1,11 +1,21 @@
 <?
+namespace CMS\Includes;
 
-class Article {
+use PDO;
+use \CMS\Includes\Connection;
+
+class Article
+{
+
+	protected $db;
+
+	public function __construct(PDO $pdo) {
+		$this->db = $pdo;
+	}
 
 	public function fetchAll() {
-		global $pdo;
 
-		$statement = $pdo->prepare("
+		$statement = $this->db->prepare("
 			SELECT * FROM articles
 		");
 
@@ -15,9 +25,8 @@ class Article {
 	}
 
 	public function fetchData($article_id) {
-		global $pdo;
 
-		$statement = $pdo->prepare("
+		$statement = $this->db->prepare("
 			SELECT * FROM articles
 			WHERE article_id = :article_id
 		");

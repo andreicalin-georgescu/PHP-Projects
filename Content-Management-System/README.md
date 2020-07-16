@@ -10,9 +10,6 @@ It uses PHP's password API for authentication and basic CSS for styling.
 - DRY up the code;
 - Add Carbon for date management(in particular, to display time in human
  friendly format);
-- Refactor code to remove pdo as a global variable in Article class;
-- Make use of composer and namespaces to auto require classes for easier
-later revisions.
 
 ## Caveats
 

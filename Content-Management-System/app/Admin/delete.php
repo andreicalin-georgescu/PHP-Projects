@@ -1,9 +1,16 @@
 <?php
-	session_start();
-	require_once '../includes/connection.php';
-	require_once '../includes/article.php';
+	use \CMS\Includes\Article;
+	use \CMS\Includes\Connection;
 
-	$article = new Article;
+	require '../../vendor/autoload.php';
+
+	session_start();
+
+	$dbConnection = new Connection;
+	$pdo = $dbConnection->getConnection();
+
+	$article = new Article($pdo);
+
 
 	if (!isset($_SESSION['logged_in'])) {
 		header('Refresh:5; url=index.php', true, 303);
@@ -34,11 +41,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>CMS Mockup</title>
-		<link rel="stylesheet" type="text/css" href="../assets/style.css">
+		<link rel="stylesheet" type="text/css" href="../Assets/style.css">
 	</head>
 	<body>
 		<div class="container">
-			<a href="index.php" id="logo"> CMS </a>
+			<a href="../../index.php" id="logo"> CMS </a>
 			<br>
 			<h4>Select an Article to Delete:</h4>
 

@@ -1,8 +1,15 @@
 <?
-	require_once 'includes/connection.php';
-	require_once 'includes/article.php';
 
-$article = new Article;
+use \CMS\Includes\Article;
+use \CMS\Includes\Connection;
+
+require '../vendor/autoload.php';
+
+$dbConnection = new Connection;
+$pdo = $dbConnection->getConnection();
+
+
+$article = new Article($pdo);
 
 if (!isset($_GET['id'])) {
 	header('Location: index.php');
@@ -18,7 +25,7 @@ $data = $article->fetchData($id);
 	<head>
 		<meta charset="UTF-8">
 		<title>CMS Mockup</title>
-		<link rel="stylesheet" type="text/css" href="assets/style.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/style.css">
 	</head>
 	<body>
 		<div class="container">
@@ -33,7 +40,7 @@ $data = $article->fetchData($id);
 				<?php echo $data['article_content'];?>
 			</p>
 
-			<a href="index.php">&larr;Back</a>
+			<a href="/index.php">&larr;Back</a>
 		</div>
 
 	</body>
