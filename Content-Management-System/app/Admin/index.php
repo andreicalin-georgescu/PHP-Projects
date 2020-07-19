@@ -68,7 +68,7 @@
 
 					<form action="index.php" method="post" autocomplete="off">
 						<input type="text" name="username" placeholder="Username">
-						<input type="text" name="password" placeholder="Password">
+						<input type="password" name="password" placeholder="Password">
 						<input type="submit" value="Log in">
 					</form>
 				</div>
@@ -93,6 +93,7 @@
 					<br>
 					<ol>
 						<li><a href="add.php">Add Article</a></li>
+						<li><a href="updateSelect.php">Update Article</a></li>
 						<li><a href="delete.php">Delete Article</a></li>
 						<li><a href="logout.php">Logout</a></li>
 					</ol>
