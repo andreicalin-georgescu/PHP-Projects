@@ -10,3 +10,6 @@ It uses PHP's password API for authentication and basic CSS for styling.
 - Add new features to the CMS;
 
 ## Caveats
+
+- The following application does not provide protection against Cross Site Scripting;
+- The following application does not provide the option to upload actual files.
