@@ -12,6 +12,3 @@ It uses PHP's password API for authentication and basic CSS for styling.
  friendly format);
 
 ## Caveats
-
-- The following application does not use propper OOP concepts. The Article class should be abstracted from database operations involving this class
-- The following application has no protection against Cross Site Scripting.
