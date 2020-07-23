@@ -20,5 +20,3 @@ class Connection
 		return $this->conn;
 	}
 }
-
-?>

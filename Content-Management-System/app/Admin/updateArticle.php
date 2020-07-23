@@ -1,16 +1,11 @@
 <?php
-	use \CMS\Includes\Connection;
-	use \CMS\Includes\Article;
+	use CMS\CMS;
 
 	require '../../vendor/autoload.php';
 
 	session_start();
 
-	$dbConnection = new Connection;
-	$pdo = $dbConnection->getConnection();
-
-	$article = new Article($pdo);
-
+	$CMS = CMS::getInstance();
 
 	if (!isset($_SESSION['logged_in'])) {
 		header('Refresh:5; url=index.php', true, 303);
@@ -18,11 +13,11 @@
 		exit();
 	}
 
-	$articles = $article->fetchAll();
+	$articles = $CMS->getAllArticles();
 
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
-		$data = $article->fetchData($id);
+		$data = $CMS->getArticle($id);
 	}
 ?>
 
@@ -40,7 +35,7 @@
 			<br>
 			<h4>Update Article</h4>
 
-			<h5>Updating Article: <?php echo $data['article_title'];?><br><br><small style="color: #aa0000;">At least one field is required!</small>
+			<h5>Updating Article: <?php echo $data->getTitle();?><br><br><small style="color: #aa0000;">At least one field is required!</small>
 </h3>
 
 			<form action="updateSelect.php" method="post" autocomplete="off">

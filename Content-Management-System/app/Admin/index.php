@@ -1,6 +1,6 @@
 <?php
 
-	use \CMS\Includes\Connection;
+	use CMS\Includes\Connection;
 
 	require '../../vendor/autoload.php';
 
@@ -17,7 +17,9 @@
 			if (empty($username) || empty($password)) {
 				$error = 'All fields are required!';
 			} else {
+
 				// check credentials
+
 				$statement = $pdo->prepare("
 					SELECT username, password
 					FROM users
@@ -35,7 +37,9 @@
 				$storedHash = $result['password'];
 
 				if (password_verify($password, $storedHash)) {
+
 					// authentication successful
+
 					$_SESSION['logged_in'] = true;
 					header('Location: index.php');
 					exit();

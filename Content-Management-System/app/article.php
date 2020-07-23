@@ -1,15 +1,11 @@
 <?
 
-use \CMS\Includes\Article;
-use \CMS\Includes\Connection;
-
 require '../vendor/autoload.php';
 
-$dbConnection = new Connection;
-$pdo = $dbConnection->getConnection();
+use CMS\Includes\Models\Article;
+use CMS\CMS;
 
-
-$article = new Article($pdo);
+$CMS = CMS::getInstance();
 
 if (!isset($_GET['id'])) {
 	header('Location: index.php');
@@ -17,7 +13,7 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-$data = $article->fetchData($id);
+$data = $CMS->getArticle($id);
 ?>
 
 <!DOCTYPE html>
@@ -25,19 +21,19 @@ $data = $article->fetchData($id);
 	<head>
 		<meta charset="UTF-8">
 		<title>CMS Mockup</title>
-		<link rel="stylesheet" type="text/css" href="../app/assets/style.css">
+		<link rel="stylesheet" type="text/css" href="Assets/style.css">
 	</head>
 	<body>
 		<div class="container">
 			<a href="index.php" id="logo"> CMS </a>
-			<h4> <?echo $data['article_title'];?> -
+			<h4> <?echo $data->getTitle();?> -
 			<small>
-				<?php echo $data['article_timestamp'];?>
+				<?php echo $data->getTime()->diffForHumans();?>
 			</small>
 			</h4>
 
 			<p>
-				<?php echo $data['article_content'];?>
+				<?php echo $data->getContent();?>
 			</p>
 
 			<a href="/index.php">&larr;Back</a>

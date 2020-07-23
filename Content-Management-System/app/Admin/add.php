@@ -1,12 +1,14 @@
 <?php
-	use \CMS\Includes\Connection;
 
 	require '../../vendor/autoload.php';
 
+	use \CMS\CMS;
+	use Carbon\Carbon;
+	use CMS\Includes\Models\Article;
+
 	session_start();
 
-	$dbConnection = new Connection;
-	$pdo = $dbConnection->getConnection();
+	$CMS = CMS::getInstance();
 
 	if (!isset($_SESSION['logged_in'])) {
 		header('Location: index.php');
@@ -19,18 +21,14 @@
 		if (empty($title) || empty($content)) {
 			$error = 'All fields are required!';
 		} else {
-			$statement = $pdo->prepare("
-				INSERT INTO articles(article_title, article_content, article_timestamp)
-				VALUES (:article_title, :article_content, :article_timestamp)
-			");
+			$newArticle = new Article;
+			$newArticle->setTitle($title);
+			$newArticle->setContent($content);
 
-			$date = date('Y-m-d h:i:s');
+			$date = Carbon::now();
+			$newArticle->setTime($date);
 
-			$statement->execute([
-				'article_title' => $title,
-				'article_content' => $content,
-				'article_timestamp' => $date
-			]);
+			$CMS->addArticle($newArticle);
 
 			header('Location: index.php');
 		}

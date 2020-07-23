@@ -1,16 +1,13 @@
 <?php
-	use \CMS\Includes\Article;
-	use \CMS\Includes\Connection;
 
 	require '../../vendor/autoload.php';
 
+	use \CMS\CMS;
+	use CMS\Includes\Models\Article;
+
 	session_start();
 
-	$dbConnection = new Connection;
-	$pdo = $dbConnection->getConnection();
-
-	$article = new Article($pdo);
-
+	$CMS = CMS::getInstance();
 
 	if (!isset($_SESSION['logged_in'])) {
 		header('Refresh:5; url=index.php', true, 303);
@@ -18,19 +15,12 @@
 		exit();
 	}
 
-	$articles = $article->fetchAll();
+	$articles = $CMS->getAllArticles();
 
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
 
-		$statement = $pdo->prepare("
-			DELETE FROM articles
-			WHERE article_id = :article_id
-		");
-
-		$statement->execute([
-			'article_id' => $id
-		]);
+		$CMS->deleteArticle($id);
 
 		header('Location: delete.php');
 	}
@@ -52,8 +42,8 @@
 			<form action="delete.php" method="get">
 				<select onchange="this.form.submit();" name="id">
 					<?php foreach ($articles as $article) {?>
-						<option value="<?php echo $article['article_id'];?>">
-							<?php echo $article['article_title'];?>
+						<option value="<?php echo $article->getId();?>">
+							<?php echo $article->getTitle();?>
 						</option>
 					<?php }?>
 				</select>

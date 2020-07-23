@@ -1,14 +1,11 @@
 <?php
-	use \CMS\Includes\Article;
-	use \CMS\Includes\Connection;
+	use CMS\CMS;
 
 	require 'vendor/autoload.php';
 
-	$dbConnection = new Connection;
-	$pdo = $dbConnection->getConnection();
+	$CMS = CMS::getInstance();
 
-	$article = new Article($pdo);
-	$articles = $article->fetchAll();
+	$articles = $CMS->getAllArticles();
 
 ?>
 
@@ -17,7 +14,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>CMS Mockup</title>
-		<link rel="stylesheet" type="text/css" href="app/assets/style.css">
+		<link rel="stylesheet" type="text/css" href="app/Assets/style.css">
 	</head>
 	<body>
 		<div class="container">
@@ -27,16 +24,15 @@
 				<?php
 				foreach ($articles as $article) {?>
 					<li>
-						<a href="app/article.php?id=<?php echo $article['article_id'];?>">
-							<?php echo $article['article_title'];?>
+						<a href="app/article.php?id=<?php echo $article->getId();?>">
+							<?php echo $article->getTitle();?>
 						</a>
-						- <small> posted <?php echo $article['article_timestamp']; ?></small>
+						- <small> posted <?php echo $article->getTime()->diffForHumans(); ?></small>
 					</li>
 				<?php } ?>
 			</ol>
 			<br>
 			<small><a href="app/Admin/index.php">admin</a></small>
 		</div>
-
 	</body>
 </html>

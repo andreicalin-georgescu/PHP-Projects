@@ -1,15 +1,14 @@
 <?php
-	use \CMS\Includes\Article;
-	use \CMS\Includes\Connection;
+	use CMS\CMS;
+	use Carbon\Carbon;
+	use CMS\Includes\Models\Article;
+
 
 	require '../../vendor/autoload.php';
 
 	session_start();
 
-	$dbConnection = new Connection;
-	$pdo = $dbConnection->getConnection();
-
-	$article = new Article($pdo);
+	$CMS = CMS::getInstance();
 
 
 	if (!isset($_SESSION['logged_in'])) {
@@ -18,11 +17,11 @@
 		exit();
 	}
 
-	$articles = $article->fetchAll();
+	$articles = $CMS->getAllArticles();
 
 	if (isset($_POST['id'])) {
 		$id = $_POST['id'];
-		$data = $article->fetchData($id);
+		$data = $CMS->getArticle($id);
 	}
 
 	if (isset($_POST['title']) || isset($_POST['content'])) {
@@ -30,8 +29,8 @@
 			$error = 'At least one field is required!';
 		}
 
-		$title = $data['article_title'];
-		$content = $data['article_content'];
+		$title = $data->getTitle();
+		$content = $data->getContent();
 
 		if (!empty($_POST['title'])) {
 			$title = htmlspecialchars($_POST['title']);
@@ -41,25 +40,18 @@
 			$content = htmlspecialchars($_POST['content']);
 		}
 
-		$new_date = date('Y-m-d h:i:s');
+		$new_date = Carbon::now();
 
 		// Update the new fields, otherwise leave old ones
 
-		$statement = $pdo->prepare("
-			UPDATE articles
-			SET
-				article_title = :article_title,
-				article_content = :article_content,
-				article_timestamp = :article_timestamp
-			WHERE article_id = :article_id
-		");
+		$newArticle = new Article;
 
-		$statement->execute([
-			'article_title' => $title,
-			'article_content' => $content,
-			'article_timestamp' => $new_date,
-			'article_id' => $id
-		]);
+		$newArticle->setTitle($title);
+		$newArticle->setContent($content);
+		$newArticle->setTime($new_date);
+		$newArticle->setId($id);
+
+		$CMS->updateArticle($newArticle);
 
 		header('Location: updateSelect.php');
 	}
@@ -81,8 +73,8 @@
 			<form action="updateArticle.php" method="get">
 				<select onchange="this.form.submit();" name="id">
 					<?php foreach ($articles as $article) {?>
-						<option value="<?php echo $article['article_id'];?>">
-							<?php echo $article['article_title'];?>
+						<option value="<?php echo $article->getId();?>">
+							<?php echo $article->getTitle();?>
 						</option>
 					<?php }?>
 				</select>
