@@ -35,8 +35,6 @@ $container['db'] = function ($c) {
 	);
 };
 
-$app->get('/', function () {
-	echo 'Home';
-});
+$app->get('/', [App\Controllers\HomeController::class, 'index']);
 
 $app->run();

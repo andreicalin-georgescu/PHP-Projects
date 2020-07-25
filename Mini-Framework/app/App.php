@@ -67,7 +67,7 @@ class App
 	}
 
 	/*
-	 * Function to execute the application
+	 * Method to execute the application
 	 */
 
 	public function run()
@@ -101,10 +101,26 @@ class App
 		return $this->process($response);
 	}
 
-	// Runs the callable object (for now)
+	/*
+	 * Method to run a response received as callable
+	 * @param {}		callable		The object intended to be executed
+	 * @return {string} The result obtained after running the callable object
+	 */
 
 	protected function process($callable)
 	{
+		// Check if callable is array (presume it is a controller)
+
+		if (is_array($callable)) {
+
+			// If the first method from callable array is not an object
+			// instantiate it
+
+			if (!is_object($callable[0])) {
+				$callable[0] = new $callable[0];
+			}
+			return call_user_func($callable);
+		}
 		return $callable();
 	}
 }
