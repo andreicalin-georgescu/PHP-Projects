@@ -144,7 +144,21 @@ class App
 			return;
 		}
 
-		// TODO: deal with headers and status codes
+		// Set status code
+
+		header(sprintf(
+			'HTTP/%s %s %s',
+			'1.1',
+			$response->getStatusCode(),
+			''
+		));
+
+		// Iterate through the headers and set them as individual headers
+
+		foreach ($response->getHeaders() as $header) {
+			header($header[0] . ': ' . $header[1]);
+		}
+
 		echo $response->getBody();
 	}
 }

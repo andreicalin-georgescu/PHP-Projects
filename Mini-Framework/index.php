@@ -7,8 +7,9 @@ $app = new App\App;
 $container = $app->getContainer();
 
 $container['RouteNotFoundErrorHandler'] = function () {
-	// update to respond with a status code using responses
-	die('404: No route found');
+	return function ($response) {
+		return $response->setBody('Page not found')->withStatus('404');
+	};
 };
 
 $container['MethodNotAllowedErrorHandler'] = function () {
@@ -35,6 +36,7 @@ $container['db'] = function ($c) {
 	);
 };
 
-$app->get('/', [App\Controllers\HomeController::class, 'index']);
+$app->get('/', [new App\Controllers\HomeController($container->db), 'index']);
+$app->get('/users', [new App\Controllers\UserController($container->db), 'index']);
 
 $app->run();
