@@ -25,4 +25,8 @@ $container['db'] = function ($c) {
 	);
 };
 
-var_dump($container->db);
+$app->get('/', function () {
+	echo 'Home';
+});
+
+$app->run();

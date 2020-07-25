@@ -5,3 +5,6 @@ an interactive course on codecourse.com.
 
 It serves as an understanding of the implementation of several basic framework concepts such as 
 containers and routing.
+
+## Todo
+- add methods to post, put, delete and patch;
