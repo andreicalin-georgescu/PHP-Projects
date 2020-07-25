@@ -5,11 +5,18 @@ namespace App;
 use App\Exceptions\RouteNotFoundException;
 use App\Exceptions\MethodNotAllowedException;
 
+/*
+ * Translates certain URIs into readable pages
+ */
+
 class Router
 {
 	// Stored routes
 
 	protected $routes = [];
+
+	// The known methods for the stored path
+
 	protected $methods = [];
 	protected $path;
 

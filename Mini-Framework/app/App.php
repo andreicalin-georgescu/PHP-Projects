@@ -5,6 +5,9 @@ namespace App;
 use App\Exceptions\RouteNotFoundException;
 use App\Exceptions\MethodNotAllowedException;
 
+/*
+ * Class that defines the general behaiviour of the Apllication
+ */
 class App
 {
 	protected $container;

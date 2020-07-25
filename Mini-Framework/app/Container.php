@@ -4,9 +4,17 @@ namespace App;
 
 use ArrayAccess;
 
+/*
+ * Class that implements container behaviour
+ * regarding stored items and caching
+ */
+
 class Container implements ArrayAccess
 {
 	protected $items = [];
+
+	// Array used to store already-called items
+
 	protected $cache = [];
 
 	/*

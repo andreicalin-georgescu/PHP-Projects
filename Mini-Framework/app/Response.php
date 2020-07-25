@@ -2,10 +2,21 @@
 
 namespace App;
 
+/*
+ * Implements a template for responding
+ * to certain user interactions
+ */
+
 class Response
 {
 	protected $body;
+
+	// The HTTP status code - by default, presumed the page loaded successfully
+
 	protected $statusCode = 200;
+
+	// Array to store the used headers for a given path
+
 	protected $headers = [];
 
 	/*
