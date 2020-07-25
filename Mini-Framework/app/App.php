@@ -37,8 +37,35 @@ class App
 
 	public function get($uri, $handler)
 	{
-		$this->container->router->addRoute($uri, $handler);
+		$this->container->router->addRoute($uri, $handler, ['GET']);
 	}
+
+	/*
+	 * Post method to satisfy POST HTTP requests
+	 * @param {string}		uri			Specifies the URI value
+	 * @param {string}		handler 	The action intended when arriving at the specified URI
+	 */
+
+	public function post($uri, $handler)
+	{
+		$this->container->router->addRoute($uri, $handler, ['POST']);
+	}
+
+	/*
+	 * Map method to satisfy an array of supported HTTP requests
+	 * @param {string}		uri			Specifies the URI value
+	 * @param {string}		handler 	The action intended when arriving at the specified URI
+	 * @param {array}		methods 	The supported methods for the specified path
+	 */
+
+	public function map($uri, $handler, array $methods = ['GET'])
+	{
+		$this->container->router->addRoute($uri, $handler, $methods);
+	}
+
+	/*
+	 * Function to execute the application
+	 */
 
 	public function run()
 	{
