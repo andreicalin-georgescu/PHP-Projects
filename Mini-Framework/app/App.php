@@ -11,7 +11,7 @@ class App
 
 	/*
 	 * App constructor
-	 * Creates a new container and adds the router to it
+	 * Creates a new container and adds the router and response to it
 	 */
 
 	public function __construct()
@@ -19,6 +19,9 @@ class App
 		$this->container = new Container([
 			'router' =>function () {
 				return new Router;
+			},
+			'response' => function () {
+				return new Response;
 			}
 		]);
 	}
@@ -98,7 +101,7 @@ class App
 			}
 		}
 
-		return $this->process($response);
+		return $this->respond($this->process($response));
 	}
 
 	/*
@@ -109,6 +112,8 @@ class App
 
 	protected function process($callable)
 	{
+		$response = $this->container->response;
+
 		// Check if callable is array (presume it is a controller)
 
 		if (is_array($callable)) {
@@ -119,8 +124,27 @@ class App
 			if (!is_object($callable[0])) {
 				$callable[0] = new $callable[0];
 			}
-			return call_user_func($callable);
+			return call_user_func($callable, $response);
 		}
-		return $callable();
+		return $callable($response);
+	}
+
+	/*
+	 * Checks the response and sets headers and takes additional steps
+	 * @param {string, response_object}		response	The response that needs to be treated
+	 * @return {string} The result obtained after running the callable object
+	 */
+
+	protected function respond($response)
+	{
+		// If the response is not a Response object, treat it as a string
+
+		if (!$response instanceof Response) {
+			echo $response;
+			return;
+		}
+
+		// TODO: deal with headers and status codes
+		echo $response->getBody();
 	}
 }
