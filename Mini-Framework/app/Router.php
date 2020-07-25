@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Exceptions\RouteNotFoundException;
 use App\Exceptions\MethodNotAllowedException;
 
 class Router
@@ -41,11 +42,16 @@ class Router
 
 	public function getResponse()
 	{
+		// Check if the route is valid
+
+		if (!isset($this->routes[$this->path])) {
+			throw new RouteNotFoundException('No route registered for' . $this->path);
+		}
+
 		// Check if the current request method is not in the array of the current route
 
 		if (!in_array($_SERVER['REQUEST_METHOD'], $this->methods[$this->path])) {
 			throw new MethodNotAllowedException;
-
 		}
 		return $this->routes[$this->path];
 	}

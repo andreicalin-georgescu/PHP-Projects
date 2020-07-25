@@ -6,6 +6,16 @@ $app = new App\App;
 
 $container = $app->getContainer();
 
+$container['RouteNotFoundErrorHandler'] = function () {
+	// update to respond with a status code using responses
+	die('404: No route found');
+};
+
+$container['MethodNotAllowedErrorHandler'] = function () {
+	// update to respond with a status code using responses
+	die('This method is not allowed');
+};
+
 $container['config'] = function () {
 	return [
 		'db_driver' => 'mysql',
@@ -28,13 +38,5 @@ $container['db'] = function ($c) {
 $app->get('/', function () {
 	echo 'Home';
 });
-
-$app->post('/signup', function () {
-	echo 'Sign Up';
-});
-
-$app->map('/users', function () {
-	echo 'Users';
-}, ['GET', 'POST']);
 
 $app->run();

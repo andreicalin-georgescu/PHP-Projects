@@ -4,7 +4,8 @@ The following is a basic implementation of a framework using PHP. It is being de
 an interactive course on codecourse.com.
 
 It serves as an understanding of the implementation of several basic framework concepts such as 
-containers and routing.
+containers and routing, controllers and responses.
 
 ## Todo
 - add methods to post, put, delete and patch;
+- update the run method to react to not having an error handler stored in the container

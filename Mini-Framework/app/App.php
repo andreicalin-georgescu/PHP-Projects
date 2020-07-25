@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Exceptions\RouteNotFoundException;
+use App\Exceptions\MethodNotAllowedException;
+
 class App
 {
 	protected $container;
@@ -75,7 +78,25 @@ class App
 
 		$router->setPath($_SERVER['PATH_INFO'] ?? '/');
 
-		$response = $router->getResponse();
+		try {
+			$response = $router->getResponse();
+		} catch (RouteNotFoundException $e) {
+
+			// Use the error handler stored in the container
+
+			if ($this->container->has('RouteNotFoundErrorHandler')) {
+				$response = $this->container->RouteNotFoundErrorHandler;
+			} else {
+
+				// If none found, do nothing
+
+				return;
+			}
+		} catch (MethodNotAllowedException $e) {
+			if ($this->container->has('MethodNotAllowedErrorHandler')) {
+				$response = $this->container->MethodNotAllowedErrorHandler;
+			}
+		}
 
 		return $this->process($response);
 	}
